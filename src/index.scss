@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+    .demo_sass {
+        font-size: 19px;
+        color: green;
+    }
+}

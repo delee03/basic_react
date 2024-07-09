@@ -1,0 +1,9 @@
+.h2 {
+    border: 8px solid purple;
+    color: red;
+}
+
+.sub_title {
+    font-size: 20px;
+    font-weight: bold;
+}
