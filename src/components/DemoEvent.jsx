@@ -14,6 +14,7 @@ const DemoEvent = () => {
                 // onClick={() => {
                 //     alert("Bạn đã bấm nút");
                 // }}
+
                 onClick={() => {
                     chaoMung("Quang Khải");
                 }}
