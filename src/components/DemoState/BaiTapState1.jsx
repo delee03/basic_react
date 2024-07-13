@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-const BaiTapState1 = () => {
+const BaiTapState1 = (props) => {
     const [selectCar, setSelectCar] = useState("black-car.jpg");
 
+    console.log(props);
+    //dữ liệu props là dữ liệu readonly;
     // Tạo mảng khi gặp 1 component có nhiều phần tử giống nhau ở đây lfa các nút chọn màu
     const arrButton = [
         {
@@ -34,11 +36,18 @@ const BaiTapState1 = () => {
     return (
         <div>
             <h2 className="text-3xl font-bold">
-                Bài tập dùng State hiển thị xe
+                Bài tập dùng State hiển thị xe = {props.count}
             </h2>
+            <button
+                onClick={props.updateStateCount}
+                className="py-2 px-5 bg-red-500 text-white rounded-lg"
+            >
+                Tăng count
+            </button>
             <div className="flex gap-6 ">
                 <div className="w-2/3">
-                    <img src={`/CarBasic/products/${selectCar}`} alt="" />
+                    <img src={`/CarBasic/products/${selectCar}`} alt="" />{" "}
+                    {/**trong string template nhớ có dấu $ dù là data binding */}
                 </div>
                 <div className="w-1/3 space-y-5">
                     {arrButton.map((item, index) => {
