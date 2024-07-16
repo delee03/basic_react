@@ -1,51 +1,37 @@
 import { useState } from "react";
-import HeaderDemo from "./components/HeaderDemo";
-import HomeComponent from "./components/HomeComponent";
-import NavComponent from "./components/NavComponent";
-import ContentComponent from "./components/ContentComponent";
-import RenderShoe from "./components/RenderShoe";
-import DemoEvent from "./components/DemoEvent";
-import DemoCss from "./components/DemoCss/DemoCss";
-import DemoState from "./components/DemoState/DemoState";
-import BaiTapState1 from "./components/DemoState/BaiTapState1";
+import { Route, Routes } from "react-router-dom";
 import BaiTapProps1 from "./components/DemoProps/BaiTapProps1";
-import ItemPokemon from "./components/DemoProps/ItemPokemon";
 import BTHienThiDienThoai from "./components/BTDienThoai/BTHienThiDienThoai";
-import CTDienThoai from "./components/BTDienThoai/CTDienThoai";
+import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 function App() {
-    const [count, setCount] = useState(0);
-    function updateStateCount() {
-        setCount(count + 1);
-    }
+    //  * Cách sử dụng và setup React Router DOM
+    // * path : endpoint /home ?
+    //  * index, element, path trong react router dom
+    //  * set up template sử dụng chung cho các trang
+    //  * PAGE not found
+    //  * lấy dữ liệu param (:id, query param (&nam=""))
+    //  * Custom xây dựng cơ chế routing theo hook useRoutes từ react router dom
 
     return (
         <>
-            {/* <DemoCss></DemoCss>
-            <HomeComponent></HomeComponent>
-            <HeaderDemo></HeaderDemo> */}
-            {/* <div className="grid grid-cols-2 h-30 ">
-                <NavComponent></NavComponent>
-                <ContentComponent></ContentComponent>
-            </div>
-            <RenderShoe></RenderShoe>
-            <DemoEvent></DemoEvent> */}
-
-            {/* <div className="container">
-                <h4 className="demo_sass">Hello bé Ba</h4>
-            </div>
-            <div className="container">
-                <DemoState></DemoState>
-                <BaiTapState1
-                    updateStateCount={updateStateCount}
-                    count={count}
-                ></BaiTapState1>
-            </div> */}
-            <div className="container">
-                {/* <BaiTapProps1></BaiTapProps1> */}
-
-                <BTHienThiDienThoai></BTHienThiDienThoai>
-            </div>
+            <Routes>
+                {/* path /bai-tap-hien-thi-dt */}
+                {/* Bọc layout từ Ant Design nằm trong HomeTemplate */}
+                {/* pathTemplate / pathCHildElement */}
+                <Route path="/" element={<HomeTemplate></HomeTemplate>}>
+                    {/* thuộc tính index xác định 1 component con sẽ hiển thị cùng lúc khi người dùng
+                truy cập tới đường dẫn của component cha */}
+                    <Route index element={<BaiTapProps1 />} />
+                    <Route
+                        path="/bai-tap-hien-thi-dt"
+                        element={<BTHienThiDienThoai></BTHienThiDienThoai>}
+                    ></Route>
+                </Route>
+                {/* path với giá trị * là các đường dẫn khác với path đã set up */}
+                <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
+            </Routes>
         </>
     );
 }

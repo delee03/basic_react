@@ -45,10 +45,14 @@ const iphones = [
     },
 ];
 const BTHienThiDienThoai = () => {
-    let [dienThoai, setDienThoai] = useState(iphones[0]);
-    function updateDienThoai() {
-        console.log(dienThoai);
-        setDienThoai(dienThoai);
+    //use State
+    const [dienThoai, setDienThoai] = useState(iphones[0]);
+
+    function updateDienThoai(selectedIphone) {
+        console.log(selectedIphone);
+        setDienThoai(selectedIphone);
+        //set một cái dienThoai khi onclick bên DSDienThoai
+        //dienThoai mới cập nhật truyền state sang CTDienThoai
     }
 
     return (

@@ -2,11 +2,11 @@ import React from "react";
 
 const CTDienThoai = ({ dienThoai }) => {
     return (
-        <div className="flex">
+        <div className="flex justify-center">
             <div className="w-3/12">
                 <img src={dienThoai.image} alt="" />
             </div>
-            <div className="w-9/12">
+            <div className="w-4/12">
                 <h3 className="text-xl font-bold text-sky-500">
                     Thông số kĩ thuật
                 </h3>

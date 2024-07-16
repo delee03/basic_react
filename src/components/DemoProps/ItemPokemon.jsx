@@ -1,11 +1,12 @@
 import React from "react";
 
-const ItemPokemon = ({ pokemon }) => {
+const ItemPokemon = (props) => {
+    const { pokemon } = props; //truyển thông qua props bằng 1 cái destrutoring
     return (
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img
-                    className="rounded-t-lg"
+                    className="rounded-lg"
                     src={
                         pokemon
                             ? pokemon.image
@@ -71,6 +72,7 @@ const ItemPokemon = ({ pokemon }) => {
                 {/* Toán tử && kiểm tra dữ liệu khác undefined, null trả về true thì mới hiển thị */}
                 {pokemon && (
                     <>
+                        {/* Toán tử fragment <> </> để bọc nhiều object là các thẻ html */}
                         <a href="#">
                             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 {pokemon?.name}
