@@ -15,20 +15,23 @@
 // đường dẫn trong style.scss css cần lấy từ asset
 
 .xiNgau {
-    @apply mt-5;
+    @apply mt-5 rounded-lg;
 }
 
 .ketQua {
-    @apply mt-5 text-2xl py-8;
+    @apply mt-5 text-2xl py-3 mb-5 bg-white rounded-md;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 0 auto;
 }
 
 .btn-xiNgau {
-    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold p-5 border-2 
+    @apply bg-pink-500 hover:bg-pink-700 text-white font-bold p-5 border-2 
     rounded-md text-3xl w-40 h-40;
 }
 
 .btn-play {
-    @apply bg-green-600 hover:bg-green-700 text-3xl text-white font-bold py-2 px-5
+    @apply bg-green-600 hover:bg-green-700 text-3xl text-white font-bold mt-10 py-2 px-5
     rounded-md;
     padding-bottom: 15px;
     margin-bottom: 30px;

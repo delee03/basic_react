@@ -110,6 +110,7 @@ const HomeTemplate = () => {
                     }}
                 >
                     <Outlet></Outlet>
+                    {/* Sử dụng thẻ outlet để render dữ liệu body từ các component */}
                 </div>
             </Content>
             <Footer
