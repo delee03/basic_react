@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "Pony";
+    src: url(./../../assets/fonts/Pony.ttf);
+}
+
+.baiTap2 {
+    font-family: Pony;
+    @apply text-center;
+    @apply text-5xl;
+    padding: 20px 0;
+    background: url(./../../assets/img/bgGame.png);
+    background-size: contain;
+}
+
+// đường dẫn trong style.scss css cần lấy từ asset
+
+.xiNgau {
+    @apply mt-5;
+}
+
+.ketQua {
+    @apply mt-5 text-2xl py-8;
+}
+
+.btn-xiNgau {
+    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold p-5 border-2 
+    rounded-md text-3xl w-40 h-40;
+}
+
+.btn-play {
+    @apply bg-green-600 hover:bg-green-700 text-3xl text-white font-bold py-2 px-5
+    rounded-md;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}

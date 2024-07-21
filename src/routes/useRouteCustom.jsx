@@ -6,6 +6,10 @@ import BaiTapProps1 from "../components/DemoProps/BaiTapProps1";
 import BTHienThiDienThoai from "../components/BTDienThoai/BTHienThiDienThoai";
 import ShoeDetail from "../components/ShoeDetail";
 import { path } from "../common/path";
+import DemoRedux from "../components/DemoRedux/DemoRedux";
+import BTLacXiNgau from "../components/BTLacXiNgau/BTLacXiNgau";
+
+//Use Route custom : dùng để tối ưu lại App.jsx nhằm giúp dễ quản lí, và clean code
 
 const useRouteCustom = () => {
     const elements = useRoutes([
@@ -24,6 +28,14 @@ const useRouteCustom = () => {
                 {
                     path: `${path.shoeDetail}/:id`,
                     element: <ShoeDetail />,
+                },
+                {
+                    path: path.demoRedux,
+                    element: <DemoRedux></DemoRedux>,
+                },
+                {
+                    path: path.btXiNgau,
+                    element: <BTLacXiNgau />,
                 },
             ],
         },
