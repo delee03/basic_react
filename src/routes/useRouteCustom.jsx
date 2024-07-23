@@ -8,6 +8,8 @@ import ShoeDetail from "../components/ShoeDetail";
 import { path } from "../common/path";
 import DemoRedux from "../components/DemoRedux/DemoRedux";
 import BTLacXiNgau from "../components/BTLacXiNgau/BTLacXiNgau";
+import DemoUseEffect from "../components/DemoUseEffect/DemoUseEffect";
+import DemoUseEffectDetail from "../components/DemoUseEffect/DemoUseEffectDetail";
 
 //Use Route custom : dùng để tối ưu lại App.jsx nhằm giúp dễ quản lí, và clean code
 
@@ -36,6 +38,14 @@ const useRouteCustom = () => {
                 {
                     path: path.btXiNgau,
                     element: <BTLacXiNgau />,
+                },
+                {
+                    path: "/demo-useEffect",
+                    element: <DemoUseEffect />,
+                },
+                {
+                    path: "/demo-useEffect-detail/:id",
+                    element: <DemoUseEffectDetail />,
                 },
             ],
         },

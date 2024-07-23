@@ -27,6 +27,10 @@ const HomeTemplate = () => {
             to: path.btXiNgau,
             content: "Chơi xí ngầu",
         },
+        {
+            to: "/demo-useEffect",
+            content: "useEffect",
+        },
     ];
 
     const { hoTen } = useSelector((state) => state.userSlice);
