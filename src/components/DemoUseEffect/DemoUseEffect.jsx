@@ -6,7 +6,9 @@ const DemoUseEffect = () => {
     const [listShoe, setListShoe] = useState();
 
     useEffect(() => {
-        console.log("Use Effect chạy sau khi giao diện xuất hiện");
+        console.log(
+            "Use Effect chạy sau khi giao diện và các biến khởi tạo xuất hiện"
+        );
         //lưu ý useEffect chạy 1 lần duy nhất khi component dc khởi tạo
         //xử lí gọi API cho component ở useEffect này;
         //=> test API
@@ -39,8 +41,7 @@ const DemoUseEffect = () => {
                             <img
                                 src={item.image}
                                 alt={item.name}
-                                style={{ width: "100%" }}
-                                className="object-contain"
+                                className="w-full"
                             />
                             <h2>{item.name}</h2>
                             <p className="mb-5">Giá tiền: {item.price}</p>
