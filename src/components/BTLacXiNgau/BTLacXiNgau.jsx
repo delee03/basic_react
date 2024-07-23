@@ -5,8 +5,11 @@ import KetQua from "./KetQua";
 import "animate.css";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { playGame } from "../../redux/slices/xiNgauSlice";
 
 const BTLacXiNgau = () => {
+    const dispatch = useDispatch();
     const notify = () =>
         toast("😲 Bạn đã chơi xí ngầu Repo Đại Phát!", {
             position: "top-right",
@@ -43,7 +46,10 @@ const BTLacXiNgau = () => {
                 <KetQua></KetQua>
 
                 <button
-                    onClick={notify}
+                    onClick={() => {
+                        notify();
+                        dispatch(playGame());
+                    }}
                     className="btn-play animate__animated animate__flash animate__infinite animate__delay-2s animate__slow "
                 >
                     Play game

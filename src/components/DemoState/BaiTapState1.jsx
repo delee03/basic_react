@@ -34,16 +34,19 @@ const BaiTapState1 = (props) => {
     ];
 
     return (
-        <div>
-            <h2 className="text-3xl font-bold">
-                Bài tập dùng State hiển thị xe = {props.count}
-            </h2>
-            <button
-                onClick={props.updateStateCount}
-                className="py-2 px-5 bg-red-500 text-white rounded-lg"
-            >
-                Tăng count
-            </button>
+        <div className="py-5">
+            <div className="py-10">
+                <h2 className="text-3xl font-bold">
+                    Bài tập dùng State hiển thị xe = {props.count}
+                </h2>
+                <button
+                    onClick={props.updateStateCount}
+                    className="py-2 px-5 bg-red-500 text-white rounded-lg"
+                >
+                    Tăng count
+                </button>
+            </div>
+
             <div className="flex gap-6 ">
                 <div className="w-2/3">
                     <img src={`/CarBasic/products/${selectCar}`} alt="" />{" "}

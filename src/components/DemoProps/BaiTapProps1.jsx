@@ -2,6 +2,7 @@ import React from "react";
 import ItemPokemon from "./ItemPokemon";
 import { DatePicker } from "antd";
 import { useSelector } from "react-redux";
+import BaiTapState1 from "../DemoState/BaiTapState1";
 
 const BaiTapProps1 = () => {
     // để truy cập tới store để lấy dữ liệu redux cần tạo biến sử dụng hook
@@ -22,6 +23,9 @@ const BaiTapProps1 = () => {
                     let { name, image, type, damage, defense } = item;
                     return <ItemPokemon pokemon={item}></ItemPokemon>;
                 })}
+            </div>
+            <div className="py-10 ">
+                <BaiTapState1></BaiTapState1>
             </div>
         </div>
     );

@@ -27,7 +27,7 @@
 
 .btn-xiNgau {
     @apply bg-pink-500 hover:bg-pink-700 text-white font-bold p-5 border-2 
-    rounded-md text-3xl w-40 h-40;
+    rounded-md text-3xl w-40 h-40 focus:border-pink-600 focus:bg-sky-500;
 }
 
 .btn-play {

@@ -1,14 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "animate.css";
+import { luaChonUser } from "../../redux/slices/xiNgauSlice";
 
 const XiNgau = () => {
+    const dispatch = useDispatch();
     const { xiNgau } = useSelector((state) => state.xiNgauSlice);
-    console.log(xiNgau);
+
+    // console.log(xiNgau);
     return (
         <div>
             <div className="xiNgau flex items-center justify-between py-10 px-16 mt-10">
-                <button className="btn-xiNgau animate__animated animate__pulse animate__infinite animate__delay-1s ">
+                <button
+                    onClick={() => {
+                        dispatch(luaChonUser(true));
+                    }}
+                    className="btn-xiNgau animate__animated animate__pulse animate__infinite animate__delay-1s "
+                >
                     Tài
                 </button>
                 <div className="flex items-center h-max p-3 bg-white rounded-lg">
@@ -28,7 +36,12 @@ const XiNgau = () => {
                         alt=""
                     />
                 </div>
-                <button className="btn-xiNgau animate__animated animate__pulse animate__infinite animate__delay-1s ">
+                <button
+                    onClick={() => {
+                        dispatch(luaChonUser(false));
+                    }}
+                    className="btn-xiNgau animate__animated animate__pulse animate__infinite animate__delay-1s "
+                >
                     Xỉu
                 </button>
             </div>

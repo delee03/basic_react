@@ -10,7 +10,9 @@ const KetQua = () => {
         <div className="ketQua">
             <p>
                 Bạn chọn:{" "}
-                <span className="ms-3 text-red-500">{yourChoice}</span>{" "}
+                <span className="ms-3 text-red-500">
+                    {yourChoice ? "Tài" : "Xỉu"}
+                </span>{" "}
             </p>
             <p>
                 TỔng số bàn thắng:{" "}
