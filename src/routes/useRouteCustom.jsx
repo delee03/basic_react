@@ -10,6 +10,7 @@ import DemoRedux from "../components/DemoRedux/DemoRedux";
 import BTLacXiNgau from "../components/BTLacXiNgau/BTLacXiNgau";
 import DemoUseEffect from "../components/DemoUseEffect/DemoUseEffect";
 import DemoUseEffectDetail from "../components/DemoUseEffect/DemoUseEffectDetail";
+import DemoFormReact from "../components/DemoFormReact/DemoFormReact";
 
 //Use Route custom : dùng để tối ưu lại App.jsx nhằm giúp dễ quản lí, và clean code
 
@@ -46,6 +47,10 @@ const useRouteCustom = () => {
                 {
                     path: "/demo-useEffect-detail/:id",
                     element: <DemoUseEffectDetail />,
+                },
+                {
+                    path: "/demo-form-react",
+                    element: <DemoFormReact></DemoFormReact>,
                 },
             ],
         },

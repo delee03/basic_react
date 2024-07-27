@@ -6,6 +6,10 @@ import HomeTemplate from "./templates/HomeTemplate/HomeTemplate";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import ShoeDetail from "./components/ShoeDetail";
 import useRouteCustom from "./routes/useRouteCustom";
+import { message } from "antd";
+import React from "react";
+
+export const NotificationContext = React.createContext();
 
 function App() {
     //  * Cách sử dụng và setup React Router DOM
@@ -16,8 +20,32 @@ function App() {
     //  * lấy dữ liệu param (:id, query param (&nam=""))
     //  * Custom xây dựng cơ chế routing theo hook useRoutes từ react router dom
 
+    const [messageApi, contextHolder] = message.useMessage();
+    const handleNotification = (status, content) => {
+        messageApi.open({
+            type: status,
+            content,
+        });
+    };
+
     const routes = useRouteCustom();
-    return routes;
+    return (
+        <>
+            <NotificationContext.Provider
+                value={{ handleNotification, test: "Linda" }}
+            >
+                {routes}
+                {contextHolder}
+            </NotificationContext.Provider>
+
+            {/* <NotificationContext.Provider value={{
+                handleNotification,
+                abc: "Khải"
+            }}>
+                <Headers></Headers>
+            </NotificationContext.Provider> */}
+        </>
+    );
 
     // return (
     //     <>

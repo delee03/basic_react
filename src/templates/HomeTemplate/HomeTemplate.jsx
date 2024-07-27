@@ -31,6 +31,10 @@ const HomeTemplate = () => {
             to: "/demo-useEffect",
             content: "useEffect",
         },
+        {
+            to: "/demo-form-react",
+            content: "Form React",
+        },
     ];
 
     const { hoTen } = useSelector((state) => state.userSlice);

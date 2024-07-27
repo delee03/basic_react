@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { NotificationContext } from "../../App";
 
 const DemoUseEffect = () => {
+    //gọi tới hooks USE Context để truy cập vào notification contexxt lấy ra các value
+
+    const dataContext = useContext(NotificationContext);
+
+    console.log(dataContext);
+
     const [listShoe, setListShoe] = useState();
 
     useEffect(() => {
@@ -23,16 +30,35 @@ const DemoUseEffect = () => {
             .catch((err) => {
                 console.log(err);
             });
+        dataContext.handleNotification("error", "Hello");
     }, []);
     console.log("Tôi là component demoUseEffect");
     console.log(listShoe);
     function render() {
         console.log("Tôi là giao diện của demo UseEffect");
-        return <h2>BCS 12</h2>;
+        return <p>{listShoe && listShoe[0]?.name}</p>;
     }
+    const [number, setNumber] = useState("");
+    //use Callback đc sử dụng khi chusgn ta cần quản lí 1 function
+    //có nên dc render lại khi component rerender hay không
+    //các tham số trong dependencies của useCallBack giúp thực hiện kiểm tra
+    //khi nào thì function đó nên render lại để lấy dữ liệu mới
+
+    const functionCallback = useCallback(render, [number]);
+
     return (
         <div>
-            {render()}
+            {/* {render()} */}
+
+            {functionCallback()}
+            <input
+                type="text"
+                placeholder="Vui lòng nhập số bất kì"
+                onChange={(event) => {
+                    setNumber(event.target.value);
+                }}
+            />
+
             <div className="grid grid-cols-4 gap-5 text-center">
                 {/* //nếu có dữ liệu thì chạy */}
                 {listShoe?.map((item, index) => {
