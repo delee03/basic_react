@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
@@ -45,10 +45,36 @@ const DemoUseEffectDetail = () => {
         };
     });
 
+    const refCustom = useRef(null);
+    const refInput = useRef(null);
+
     return (
         <>
-            {/* {randomMemmo} */}
-            {random}
+            <input
+                type="text"
+                ref={refInput}
+                onChange={(e) => {
+                    // console.log(e.target.value);
+                    console.log(refInput.current.value);
+                }}
+                placeholder="Nhập năm sinh"
+            />
+
+            <p>{refInput?.current?.value}</p>
+
+            <button
+                onClick={() => {
+                    refCustom.current.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                    });
+                }}
+                className="py-2 px-5 bg-black text-white rounded-md"
+            >
+                Bấm vào để xem
+            </button>
+            {randomMemmo}
+            {/* {random} */}
             <input
                 type="text"
                 className="p-2 border-black rounded-md"
@@ -90,7 +116,37 @@ const DemoUseEffectDetail = () => {
                     </div>
                 )}
             </div>
-            <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div ref={refCustom}>
                 {/* Sản phẩm liên quan */}
                 <h3>Các sản phẩm liên quan</h3>
                 {shoe.relatedProducts?.map((item, index) => {

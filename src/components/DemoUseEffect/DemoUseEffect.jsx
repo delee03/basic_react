@@ -40,11 +40,11 @@ const DemoUseEffect = () => {
     }
     const [number, setNumber] = useState("");
     //use Callback đc sử dụng khi chusgn ta cần quản lí 1 function
-    //có nên dc render lại khi component rerender hay không
+    //có nên dc render lại khi component re render hay không
     //các tham số trong dependencies của useCallBack giúp thực hiện kiểm tra
     //khi nào thì function đó nên render lại để lấy dữ liệu mới
 
-    const functionCallback = useCallback(render, [number]);
+    const functionCallback = useCallback(render, [listShoe]);
 
     return (
         <div>
