@@ -5,8 +5,11 @@ const InputCustom = ({
     id,
     placeholder,
     name,
+    onBlur,
     onChange,
     value,
+    error,
+    touched,
 }) => {
     return (
         <div>
@@ -22,10 +25,12 @@ const InputCustom = ({
                 // onChange={handleOnchange}
                 onChange={onChange}
                 name={name}
+                onBlur={onBlur}
                 id={id}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 placeholder={placeholder}
             />
+            {error && touched ? <p className="text-red-500">{error}</p> : null}
         </div>
     );
 };

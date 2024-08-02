@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import ButtonCustom from "./ButtonCustom";
 import TableNhanVien from "./TableNhanVien";
+import * as yup from "yup";
+
 const DemoFormReact = () => {
     dayjs.extend(customParseFormat);
 
@@ -41,9 +43,54 @@ const DemoFormReact = () => {
             console.log(values);
             setArrNhanVien([...arrNhanVien, values]);
         },
+        //yup .object sẽ nhận 1 object chứa thông tin các validation dành
+        //cho các field ở initialValue;
+        validationSchema: yup.object({
+            email: yup
+                .string()
+                .required("Vui lòng không bỏ trống!")
+                .email("Vui lòng nhập đúng định dạng email"),
+            hoTen: yup
+                .string()
+                .required("Vui lòng không bỏ trống!")
+                .matches(/^[A-Za-zÀ-ỹ\s]+$/, "Vui lòng nhập chữ không có số"),
+            msnv: yup.string().required("Vui lòng không bỏ trống!"),
+            msnv: yup
+                .number()
+                .min(4, "Tối thiểu 4 kí tự")
+                .max(8, "Tối đa 8 kí tự"),
+            sdt: yup
+                .string()
+                .matches(
+                    /^(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})$/,
+                    "Vui lòng nhập đúng sdt Việt Nam"
+                ),
+            ngaySinh: yup.string().required("Vui lòng không bỏ trống!"),
+            gioiTinh: yup.string().required("Vui lòng chọn giới tính!"),
+            matKhau: yup
+                .string()
+                .matches(
+                    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
+                    "Vui lòng tạo mật khảu có ít nhất 1 kí tự đặt biệt, 1 số"
+                ),
+        }),
+        //kiểm tra msnv: từ 4-8 kí tự, không bỏ trống
+        //sdt: nhập đúng số dt vn(regex)
+        //matKhau: bao gồm ít nhất 1 kí tự đặt biệt, 1 chữ hoa, 1 số
+        //giới tính : bắt buộc chọn
+        //họ tên phải là chữ (regex)
     });
-    const { handleChange, handleSubmit, values, setFieldValue } = formik;
+    const {
+        handleChange,
+        handleSubmit,
+        values,
+        setFieldValue,
+        errors,
+        touched,
+        handleBlur,
+    } = formik;
 
+    console.log(errors, touched);
     return (
         <div>
             <h2>Demo Form React ứng dụng lấy from dữ liệu trong REACT</h2>
@@ -54,15 +101,21 @@ const DemoFormReact = () => {
                         placeholder={"Vui lòng nhập msnv"}
                         name={"msnv"}
                         id={"msnv"}
+                        error={errors.msnv}
+                        touched={touched.msnv}
                         value={values.msnv}
+                        onBlur={handleBlur}
                         onChange={handleChange}
                     ></InputCustom>
                     <InputCustom
                         labelContent={"Họ tên"}
                         placeholder={"Vui lòng nhập họ tên"}
                         name={"hoTen"}
+                        error={errors.hoTen}
+                        touched={touched.hoTen}
                         id={"hoTen"}
                         value={values.hoTen}
+                        onBlur={handleBlur}
                         onChange={handleChange}
                     ></InputCustom>
                     <InputCustom
@@ -70,15 +123,24 @@ const DemoFormReact = () => {
                         placeholder={"Vui lòng nhập email"}
                         name={"email"}
                         id={"email"}
+                        error={errors.email}
+                        touched={touched.email}
+                        onBlur={handleBlur}
                         value={values.email}
                         onChange={handleChange}
                     ></InputCustom>
+                    {/* {touched.email && errors.email ? (
+                        <p className="text-red-500">{errors.email}</p>
+                    ) : null} */}
                     <InputCustom
                         labelContent={"Số điện thoại"}
                         placeholder={"Vui lòng nhập sdt"}
                         name={"sdt"}
+                        error={errors.sdt}
+                        touched={touched.sdt}
                         id={"sdt"}
                         value={values.sdt}
+                        onBlur={handleBlur}
                         onChange={handleChange}
                     ></InputCustom>
                     <div>
@@ -90,6 +152,9 @@ const DemoFormReact = () => {
                         </label>
                         <DatePicker
                             className="w-full"
+                            error={errors.ngaySinh}
+                            onBlur={handleBlur}
+                            touched={touched.ngaySinh}
                             onChange={(date, dateString) => {
                                 console.log(date);
                                 setFieldValue("ngaySinh", dateString);
@@ -119,12 +184,18 @@ const DemoFormReact = () => {
                             <option value="Nam ">Nam</option>
                             <option value="Nữ">Nữ</option>
                         </select>
+                        {touched.gioiTinh && errors.gioiTinh ? (
+                            <p className="text-red-500">{errors.gioiTinh}</p>
+                        ) : null}
                     </div>
 
                     <InputCustom
                         labelContent={"Mật khẩu"}
                         placeholder={"Vui lòng nhập mật khẩu"}
                         name={"matKhau"}
+                        onBlur={handleBlur}
+                        error={errors.matKhau}
+                        touched={touched.matKhau}
                         id={"matKhau"}
                         value={values.matKhau}
                         onChange={handleChange}
