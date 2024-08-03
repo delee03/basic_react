@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useFormik } from "formik";
 import InputCustom from "./InputCustom";
 import { DatePicker } from "antd";
@@ -39,9 +39,10 @@ const DemoFormReact = () => {
         //initialValues là dữ liệu mặc định của formik dc cung cấp từ người dùng
 
         //onSubmit được thực thi khi form bắt đầu chạy sự kiện submit, tham số values đại diện cho dữ liệu của tất cả field trong form
-        onSubmit: (values) => {
+        onSubmit: (values, { resetForm }) => {
             console.log(values);
             setArrNhanVien([...arrNhanVien, values]);
+            resetForm();
         },
         //yup .object sẽ nhận 1 object chứa thông tin các validation dành
         //cho các field ở initialValue;
@@ -54,9 +55,9 @@ const DemoFormReact = () => {
                 .string()
                 .required("Vui lòng không bỏ trống!")
                 .matches(/^[A-Za-zÀ-ỹ\s]+$/, "Vui lòng nhập chữ không có số"),
-            msnv: yup.string().required("Vui lòng không bỏ trống!"),
             msnv: yup
-                .number()
+                .string()
+                .required("Vui lòng không bỏ trống")
                 .min(4, "Tối thiểu 4 kí tự")
                 .max(8, "Tối đa 8 kí tự"),
             sdt: yup
@@ -88,9 +89,35 @@ const DemoFormReact = () => {
         errors,
         touched,
         handleBlur,
+        resetForm,
+        setValues,
     } = formik;
 
-    console.log(errors, touched);
+    // console.log(errors, touched);
+    const valueContext = useContext(Notification);
+    //tate arrNhanVien) được bọc trong useCallback để tránh tạo ra một hàm mới trong mỗi lần render:
+    const deleteNhanVien = useCallback((id) => {
+        const arrNhanVienClone = [...arrNhanVien];
+        const arrNhanVienUpdate = arrNhanVienClone.filter(
+            (nv) => nv.msnv != id
+        );
+        //không cần kiểm tra index có hay không vì record có mới có nút xóa để click !
+        setArrNhanVien(arrNhanVienUpdate);
+    });
+
+    //get info đưa lên input sử dụng method setValue từ formik lấy record đưa lên form
+    const getInfoNV = () => {};
+
+    const updateNhanVien = () => {
+        //sử dụng isValid từ formik để kiểm tra, nếu không còn lỗi thì sẽ cập nhật dữ liệu
+    };
+
+    const searchNhanVien = () => {
+        //tìm kiếm nhân viên theo hoTen
+        //sử dụng filter để lọc ra nhân viên có tên giống với giá trị nhập vào
+        //nếu có thì hiển thị thông báo, không thì thông báo không tìm thấy
+    };
+
     return (
         <div>
             <h2>Demo Form React ứng dụng lấy from dữ liệu trong REACT</h2>
@@ -152,19 +179,22 @@ const DemoFormReact = () => {
                         </label>
                         <DatePicker
                             className="w-full"
-                            error={errors.ngaySinh}
-                            onBlur={handleBlur}
-                            touched={touched.ngaySinh}
                             onChange={(date, dateString) => {
                                 console.log(date);
                                 setFieldValue("ngaySinh", dateString);
                                 console.log(dateString);
                             }}
+                            onBlur={() =>
+                                handleBlur({ target: { name: "ngaySinh" } })
+                            }
                             format={"DD-MM-YYYY"}
                             // defaultValue={dayjs(value.getDate(), format)}
                             // minDate={dayjs("2024-08-01", format)}
                             // maxDate={dayjs("2024-10-31", format)}
                         />
+                        {touched.ngaySinh && errors.ngaySinh ? (
+                            <p className="text-red-500">{errors.ngaySinh}</p>
+                        ) : null}
                     </div>
                     <div>
                         <label
@@ -207,6 +237,9 @@ const DemoFormReact = () => {
                     <ButtonCustom
                         content={"Reset Form"}
                         bgColor="bg-black"
+                        onClick={() => {
+                            resetForm();
+                        }}
                         bgHover="bg-slate-700"
                     />
                     <ButtonCustom
@@ -216,7 +249,7 @@ const DemoFormReact = () => {
                     />
                 </div>
             </form>
-            <TableNhanVien data={arrNhanVien} />
+            <TableNhanVien data={arrNhanVien} handleDeleteNV={deleteNhanVien} />
         </div>
     );
 };
