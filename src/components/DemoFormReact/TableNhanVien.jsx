@@ -40,11 +40,12 @@ const TableNhanVien = ({ data, handleDeleteNV }) => {
             //xác định thuộc tính tới lấy dữ liệu
             dataIndex: "msnv",
             key: "msnv",
+
             //quyết định cấu trúc jsx hiển thị trên giao diện , có 3 tham số là text (nội dung của dataIndex lấy về)
-            //record đại diện cho phần tử đang lấy dữ liệu), index (vị trí index của record trong data  )
+            //record đại diện cho phần tử đang lấy dữ liệu (cả cái object )), index (vị trí index của record trong data  )
             // render: (text, record, index) => {
             //     return <button className="bg-red-500">{text}</button>;
-            // },
+            // }, có thể dùng các thẻ link để ck hướng hoặc xem chi tiết
         },
         {
             title: "Họ tên",
@@ -77,7 +78,7 @@ const TableNhanVien = ({ data, handleDeleteNV }) => {
                             record.gioiTinh === "Nam" ? "volcano" : "geekblue"
                         }
                     >
-                        {text}
+                        {record.gioiTinh}
                     </Tag>
                 );
             },
@@ -89,7 +90,6 @@ const TableNhanVien = ({ data, handleDeleteNV }) => {
                 return (
                     <>
                         <ButtonCustom
-                            onClick={console.log("first")}
                             className="mb-2"
                             content={"Sửa"}
                             bgColor="bg-yellow-500"

@@ -10,9 +10,10 @@ const InputCustom = ({
     value,
     error,
     touched,
+    classWrapper = "",
 }) => {
     return (
-        <div>
+        <div className={`${classWrapper}`}>
             <label
                 htmlFor="first_name"
                 className="block mb-2 text-sm font-medium text-gray-900"

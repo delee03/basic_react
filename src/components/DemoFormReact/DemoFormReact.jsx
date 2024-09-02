@@ -3,13 +3,15 @@ import { useFormik } from "formik";
 import InputCustom from "./InputCustom";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
+import moment from "moment";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import ButtonCustom from "./ButtonCustom";
 import TableNhanVien from "./TableNhanVien";
+
 import * as yup from "yup";
 
 const DemoFormReact = () => {
-    dayjs.extend(customParseFormat);
+    // dayjs.extend(customParseFormat);
 
     // const [value, setvalue] = useState({
     //     hoTen: "",
@@ -40,8 +42,15 @@ const DemoFormReact = () => {
 
         //onSubmit được thực thi khi form bắt đầu chạy sự kiện submit, tham số values đại diện cho dữ liệu của tất cả field trong form
         onSubmit: (values, { resetForm }) => {
+            //resetForm đến từ formikHelpers dc destructoring
             console.log(values);
+
+            //const newArrNV= [...arrNhanVien];
+            //newArrNV.push(values);
+            //setArrNhanVien(newArrNV);
             setArrNhanVien([...arrNhanVien, values]);
+            // Reset DatePicker về null
+            setFieldValue("ngaySinh", null);
             resetForm();
         },
         //yup .object sẽ nhận 1 object chứa thông tin các validation dành
@@ -118,6 +127,8 @@ const DemoFormReact = () => {
         //nếu có thì hiển thị thông báo, không thì thông báo không tìm thấy
     };
 
+    console.log(errors);
+    console.log(touched);
     return (
         <div>
             <h2>Demo Form React ứng dụng lấy from dữ liệu trong REACT</h2>
@@ -179,9 +190,19 @@ const DemoFormReact = () => {
                         </label>
                         <DatePicker
                             className="w-full"
+                            // value={
+                            //     values.ngaySinh
+                            //         ? moment(values.ngaySinh, "DD-MM-YYYY")
+                            //         : null
+                            // }
+                            value={
+                                values.ngaySinh
+                                    ? dayjs(values.ngaySinh, "DD-MM-YYYY")
+                                    : ""
+                            }
                             onChange={(date, dateString) => {
                                 console.log(date);
-                                setFieldValue("ngaySinh", dateString);
+                                setFieldValue("ngaySinh", dateString || "");
                                 console.log(dateString);
                             }}
                             onBlur={() =>
@@ -207,11 +228,11 @@ const DemoFormReact = () => {
                             id="countries"
                             name="gioiTinh"
                             onChange={handleChange}
+                            placeholder="Chọn giới tính"
                             value={values.gioiTinh}
                             className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         >
-                            <option selected>Choose a gender</option>
-                            <option value="Nam ">Nam</option>
+                            <option value="Nam">Nam</option>
                             <option value="Nữ">Nữ</option>
                         </select>
                         {touched.gioiTinh && errors.gioiTinh ? (
@@ -228,6 +249,7 @@ const DemoFormReact = () => {
                         touched={touched.matKhau}
                         id={"matKhau"}
                         value={values.matKhau}
+                        classWrapper="col-span-2"
                         onChange={handleChange}
                     ></InputCustom>
                 </div>
